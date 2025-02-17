@@ -35,6 +35,7 @@ bc <- boxcox(lm(x ~ 1))
 lambda <- bc$x[which.max(bc$y)]
 x_transformed <- (x ^ lambda - 1) / lambda
 
+
 # Mean of the new variable
 
 mean(x_transformed)
@@ -73,9 +74,18 @@ p2
 # Relationship between length and birth weight
 cor.test(df$Length, df$Birthweight, method='pearson')
 
-# Partial correlation test between birth weight, length and head circumference of baby
+# Relationship between length and head circumference
+cor.test(df$Length, df$Headcirc, method='pearson')
+
+# Relationship between  head circumference and birth weight
+cor.test(df$Headcirc, df$Birthweight, method='pearson')
+
+# Partial correlation test between birth weight AND head circumference CONTROLLING length of baby
 pcor.test(df$Headcirc,df$Birthweight,df$Length, method = "pearson")
 
 
-# Partial correlation test between birth weight, length and head circumference of baby
+# Partial correlation test between birth weight AND length CONTROLLING head circumference of baby
 pcor.test(df$Length,df$Birthweight,df$Headcirc, method = "pearson")
+
+# Partial correlation test between length AND head circumference CONTROLLING birth weight of baby
+pcor.test(df$Length,df$Headcirc,df$Birthweight, method = "pearson")
